@@ -1,28 +1,33 @@
-# Adonis API application
+# Atena - back-end
 
-This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
+O objetivo desse sistema é integrar aluno e professor deu ma forma que jamais foi vista, com a linguagem que o mercado mais precisa!
 
-1. Bodyparser
-2. Authentication
-3. CORS
-4. Lucid ORM
-5. Migrations and seeds
+
 
 ## Setup
 
-Use the adonis command to install the blueprint
+Para inicio, clone o repositorio e rode os seguintes comandos:
 
+para instalar as dependencias
 ```bash
-adonis new yardstick --api-only
+npm install
 ```
-
-or manually clone the repo and then run `npm install`.
-
+cp .env.example .env e configure o banco
+para levantar o backend
+```bash
+npm run start
+```
 
 ### Migrations
 
-Run the following command to run startup migrations.
-
+Rode tambem as migrations
 ```js
 adonis migration:run
+```
+
+ps, caso não tenha a CLI do adonis, rode npm install ```bash npm i -g @adonisjs/cli```
+
+para mais informações
+```js
+adonis --help 
 ```
