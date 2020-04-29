@@ -44,14 +44,8 @@ module.exports = {
       }
     },
 
-    // Path to the API docs
-    // Sample usage
-    // apis: [
-    //    'docs/**/*.yml',    // load recursive all .yml file in docs directory
-    //    'docs/**/*.js',     // load recursive all .js file in docs directory
-    // ]
     apis: [
-      'app/**/*.js',
+      'docs/**/*.js',     // load recursive all .js file in docs directory
       'start/routes.js'
     ]
   }

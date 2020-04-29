@@ -1,5 +1,6 @@
 'use strict'
 
+
 /*
 |--------------------------------------------------------------------------
 | Routes
@@ -16,15 +17,14 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-
-Route
-  .post('/auth', 'UserController.login')
-
 Route.post('/users', 'UserController.create')
-Route
-  .group(() => {
-    Route
-      .get('me', 'UserController.me')
+Route.get('/logout', 'UserController.logout')
+Route.post( '/auth', 'UserController.login')
+Route.get('/cursos', 'CursoController.index')
+Route.get('/cursos/students/:id', 'CursoController.showStudents')
+Route.put('/update/:id', 'CursoController.update')
+Route.group(() => {
+  Route.post('/curso/create', 'CursoController.store')
+  Route.get('me', 'UserController.me')
   })
-  .prefix('/api/v1')
   .middleware(['auth:jwt'])
