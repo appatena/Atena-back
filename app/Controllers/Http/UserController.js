@@ -1,14 +1,14 @@
 "use strict";
 const User = use("App/Models/User");
-
+const UserService = use("App/Services/UserService");
+const service = new UserService();
 class UserController {
   async me({ auth }) {
     return auth.getUser();
   }
 
   async login({ request, auth, response }) {
-    const { email, password } = request.all();
-    let token = await auth.attempt(email, password);
+    let token = await service.login(request, auth);
     return response
       .status(200)
       .json({ data: token, message: "Login successfull", status: true });
@@ -19,8 +19,7 @@ class UserController {
     return response.redirect("/");
   }
   async create({ request }) {
-    const data = request.only(["username", "email", "password"]);
-    const user = await User.create(data);
+    let user = await service.create(request)
     return user;
   }
 }
