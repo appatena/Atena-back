@@ -18,7 +18,13 @@ const Route = use('Route')
 
 
 Route
-  .get('users/:id', 'UserController.show')
-  .middleware('auth')
+  .post('/auth', 'UserController.login')
 
-Route.post('login', 'UserController.login')
+Route.post('/users', 'UserController.create')
+Route
+  .group(() => {
+    Route
+      .get('me', 'UserController.me')
+  })
+  .prefix('/api/v1')
+  .middleware(['auth:jwt'])
