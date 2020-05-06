@@ -1,6 +1,6 @@
 "use strict";
 
-const Curso = use('App/Models/Curso');
+const Curso = use("App/Models/Curso");
 const User = use("App/Models/User");
 const Database = use("Database");
 
@@ -9,19 +9,19 @@ class CursoService {
     const cursos = await Curso.all();
     return cursos;
   }
-  async getCourseByUser({ params }) {
-    let cursos = await Database.from("cursos").where("id", params);
+  async getCourseByUser(userId) {
+    let cursos = await Database.from("cursos").where("user_id", userId);
     return cursos;
   }
-  async crateCourse({ auth, request }) {
-    const { id } = auth.user;
-    const data = request.only(["nome"]);
-    const curso = await Curso.create({ ...data, user_id: id });
+  async crateCourse(request) {
+    debugger
+    const data = request.all();
+    const curso = await Curso.create({ nome: data.titulo, description: data.descricao, url: data.url, user_id: 1 });
     return curso;
   }
 
-  async showStudents({ params }) {
-    const curso = await Curso.findOrFail(params.id);
+  async showStudents(id) {
+    const curso = await Curso.findOrFail(id);
     const users = await Database.from("users").where("curso_id", curso.id);
     return users;
   }
@@ -32,7 +32,6 @@ class CursoService {
     const data = request.all();
     user.merge({ curso_id: data.id });
     await user.save();
-
     return user;
   }
 }

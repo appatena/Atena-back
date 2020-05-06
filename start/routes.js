@@ -17,14 +17,15 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.post('/api/users', 'UserController.create')
-Route.get('/api/logout', 'UserController.logout')
-Route.post( '/api/auth', 'UserController.login')
+Route.post('/users', 'UserController.create')
+Route.get('/logout', 'UserController.logout')
+Route.post( '/auth', 'UserController.login')
 Route.get('/api/cursos', 'CursoController.index')
-Route.get('/api/cursos/students/:id', 'CursoController.showStudents')
-Route.put('/api/update/:id', 'CursoController.update')
+Route.get('/cursos/students/:id', 'CursoController.showStudents')
+Route.get('/cursos/user/:id', 'CursoController.getCourseUser')
+Route.put('/update/:id', 'CursoController.update')
+Route.post('/api/curso/create', 'CursoController.store')
 Route.group(() => {
-  Route.post('/api/curso/create', 'CursoController.store')
-  Route.get('/api/me', 'UserController.me')
+  Route.get('me', 'UserController.me')
   })
   .middleware(['auth:jwt'])
