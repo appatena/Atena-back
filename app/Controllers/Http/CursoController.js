@@ -3,16 +3,18 @@ const CursoService = use("App/Services/CursoService");
 const service = new CursoService();
 class CursoController {
   async index() {
-    debugger;
     return await service.getAll();
   }
-
-  async store({ auth, request }) {
-    return await service.crateCourse(auth, request);
+  async store({request }) {
+    debugger
+    return await service.crateCourse(request);
   }
-
+  async getCourseUser({ params }) {
+    return await service.getCourseByUser(params.id);
+  }
   async showStudents({ params }) {
-    return await service.showStudents(params);
+    let paramId = await service.showStudents(params.id)
+    return paramId;
   }
 
   async update({ auth, params, request }) {
