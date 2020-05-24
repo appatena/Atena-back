@@ -2,6 +2,7 @@
 
 const Curso = use("App/Models/Curso");
 const User = use("App/Models/User");
+const Category = use("App/Models/Categoria")
 const Database = use("Database");
 
 class CursoService {
@@ -19,13 +20,19 @@ class CursoService {
     const curso = await Curso.create({ nome: data.titulo, description: data.descricao, url: data.url, user_id: 1 });
     return curso;
   }
-
+  async cursesCategory(params) {
+    let curse = await Database.from("cursos").where("categoria_id", params)
+    return curse
+  }
   async showStudents(id) {
     const curso = await Curso.findOrFail(id);
     const users = await Database.from("users").where("curso_id", curso.id);
     return users;
   }
-
+  async getCategories() {
+   const categories = await Category.all()
+   return categories;
+  }
   async updateStudantCourses({ auth, params, request }) {
     const { id } = auth.user;
     const user = await Curso.findOrFail(params.id);

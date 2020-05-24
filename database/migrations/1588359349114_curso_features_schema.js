@@ -6,8 +6,7 @@ const Schema = use('Schema')
 class CursoFeaturesSchema extends Schema {
   up () {
     this.table('cursos', (table) => {
-      table.binary('image')
-      table.string('description')
+      table.integer('categoria_id').unsigned().references('id').inTable('categorias')
     })
   }
 
